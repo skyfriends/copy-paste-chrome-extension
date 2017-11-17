@@ -1,8 +1,3 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Set Page Color Popup</title>
-    <style>
     body {
       overflow: hidden;
       margin: 0px;
@@ -43,13 +38,3 @@
       border: 1px solid yellow;
       color: yellow;
     }
-    </style>
-    <script src="popup.js"></script>
-  </head>
-  <body>
-    <div id="red">red</div>
-    <div id="blue">blue</div>
-    <div id="green">green</div>
-    <div id="yellow">yellow</div>
-  </body>
-</html>
