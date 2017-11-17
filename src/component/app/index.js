@@ -10,12 +10,12 @@ class App extends React.Component {
   handleCopy(e) {
     const stored = [];
     const data = e.target.innerText;
-    console.log(data);
-
+    const vals = ['name', 'street', 'city', 'state', 'zip'];
     const par = data.split(',');
     par.map(v => stored.push(v));
-    console.log('stored', stored);
-    console.log(Object.assign({}, stored));
+    const address = {};
+    vals.forEach((v, i) => (address[v] = par[i]));
+    console.log('address', address);
 
     e.clipboardData.setData('text', par);
     e.preventDefault();
