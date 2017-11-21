@@ -7,8 +7,11 @@
     "default_title": "Set this page's color.",
     "default_popup": "popup.html"
   },
-  "background": {
-    "scripts": ["background.js"]
-  },
-  "manifest_version": 2
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["listening.js"]
+    }
+  ]
 }

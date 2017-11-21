@@ -1,4 +1,4 @@
-window.addEventListener('copy', (e) => {
+document.addEventListener('copy', (e) => {
   const stored = [];
   const data = e.target.innerText;
   const vals = ['name', 'street', 'city', 'state', 'zip'];
@@ -8,5 +8,6 @@ window.addEventListener('copy', (e) => {
   vals.forEach((v, i) => (address[v] = par[i]));
   console.log('address', address);
   e.clipboardData.setData('text', par);
+  localStorage.setItem('yeahhhhh', address);
   e.preventDefault();
 });
