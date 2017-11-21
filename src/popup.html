@@ -1,39 +1,25 @@
-<!-- <!doctype html>
-<html>
-  <head>
-    <title>Set Page Color Popup</title>
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    <script src="popup.js"></script>
-  </head>
-  <body>
-    <div id="red">red</div>
-    <div id="blue">blue</div>
-    <div id="green">green</div>
-    <div id="yellow">yellow</div>
-  </body>
-</html> -->
-
-<!DOCTYPE html>
-<html>
-
 <head>
-  <style>
-    body {
-      height: 150px;
-      width: 220px;
-    }
-
-    .wrapper {
-      text-align: center;
-    }
-  </style>
+<style>
+tr {
+  white-space: nowrap;
+}
+.results {
+  text-align: right;
+  min-width: 6em;
+  color: black;
+}
+</style>
+<script src="popup.js"></script>
 </head>
-
-<body background="https://media.giphy.com/media/sIIhZliB2McAo/giphy.gif">
-  <div class="wrapper">
-    <button id="clickme">Let's do it</button>
-  </div>
-  <script type="text/javascript" src="popup.js"></script>
+<body>
+<table>
+  <tr>
+    <td><button id="testRequest">Measure sendRequest</button></td>
+    <td id="resultsRequest" class="results">(results)</td>
+  </tr>
+  <tr>
+    <td><button id="testConnect">Measure postMessage</button></td>
+    <td id="resultsConnect" class="results">(results)</td>
+  </tr>
+</table>
 </body>
-
-</html>

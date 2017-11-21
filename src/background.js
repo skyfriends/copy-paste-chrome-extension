@@ -1,12 +1,4 @@
-window.addEventListener('copy', (e) => {
-  const stored = [];
-  const data = e.target.innerText;
-  const vals = ['name', 'street', 'city', 'state', 'zip'];
-  const par = data.split(',');
-  par.map(v => stored.push(v));
-  const address = {};
-  vals.forEach((v, i) => (address[v] = par[i]));
-  console.log('address', address);
-  e.clipboardData.setData('text', par);
-  e.preventDefault();
-});
+chrome.tabs.sendMessage(tab.id, { greeting: 'hello' }, function(response) {
+  // JSON.parse does not evaluate the attacker's scripts.
+  var resp = JSON.parse(response.farewell)
+})
