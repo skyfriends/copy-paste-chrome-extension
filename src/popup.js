@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     pasta.addEventListener('click', (e) => {
-      console.log(copiedData[0]);
-      console.log(theStates[copiedData[2].split(',')[1].trim()]);
+      console.log(copiedData);
+      console.log(copiedData[2].split(',')[1].match(/[A-Z]/gi).join(''));
 
       chrome.tabs.executeScript(null, {
         code: `
@@ -99,10 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
         cityGB.value = "${copiedData[2].split(',')[0]}"
 
         let zipGB = document.getElementById('dropship_order_zip_code')
-        zipGB.value = "${copiedData[2].split(',')[2].trim()}"
+        zipGB.value = "${copiedData[2].match(/[0-9]/gi).slice(0,5).join('')}"
 
         let stateGB = document.getElementById('states_select')
-        stateGB.value = "${copiedData[2].split(',')[1].trim()}"`,
+        stateGB.value = "${copiedData[2].split(',')[1].match(/[A-Z]/gi).join('')}"`,
       });
     });
   });
