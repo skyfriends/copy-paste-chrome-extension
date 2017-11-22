@@ -1,23 +1,44 @@
 //* * gooten.com inputs **/
-// const inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
-// const name = inputArr[2]
-// const address1 = inputArr[3]
-// const address2 = inputArr[4]
-// const city = inputArr[5]
-// const state = inputArr[6]
-// const zip = inputArr[8]
-// const phone = inputArr[9]
-// const email = inputArr[10]
-// const submitButton = document.getElementsByClassName('btn btn-default')[1]
+let inputArr = ''
+let name = ''
+let address1 = ''
+let address2 = ''
+let city = ''
+let state = ''
+let zip = ''
+let phone = ''
+let email = ''
+// let submitButton = document.getElementsByClassName('btn btn-default')[1]
+
 //* * gearbubble.com ids **/
-const firstName = 'dropship_order_first_name';
-const lastName = 'dropship_order_last_name';
-const address1 = 'dropship_order_address1';
-const address2 = 'dropship_order_address2';
-const city = 'dropship_order_city';
-const zip = 'dropship_order_zip_code';
+let firstName = ''
+let lastName = ''
+
+
+const page = window.location.href
+  
+  if(page.includes('gearbubble')) {
+firstName = 'dropship_order_first_name';
+lastName = 'dropship_order_last_name';
+address1 = 'dropship_order_address1';
+address2 = 'dropship_order_address2';
+city = 'dropship_order_city';
+zip = 'dropship_order_zip_code';
+} else if(page.includes('gooten')) {
+let inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
+let name = inputArr[2]
+let address1 = inputArr[3]
+let address2 = inputArr[4]
+let city = inputArr[5]
+let state = inputArr[6]
+let zip = inputArr[8]
+let phone = inputArr[9].value = '555-555-5555'
+let email = inputArr[10].value = 'me@you.com'
+}
+console.log(firstName)
 
 document.addEventListener('copy', (e) => {
+
   const stored = [];
   // const data = e.target.innerText;
   const data =  window.getSelection().toString()

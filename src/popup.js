@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     pasta.addEventListener('click', (e) => {
       console.log(copiedData);
-      console.log(copiedData[2].split(',')[1].match(/[A-Z]/gi).join(''));
-
+      // console.log(copiedData[2].split(',')[1].match(/[A-Z]/gi).join(''));
+      if (copiedData.length > 4) {
       chrome.tabs.executeScript(null, {
         code: `
         let firstGB = document.getElementById('dropship_order_first_name')
@@ -95,16 +95,50 @@ document.addEventListener('DOMContentLoaded', () => {
         let firstAddGB = document.getElementById('dropship_order_address1')
         firstAddGB.value = "${copiedData[1]}"
 
+        let secondAddGB = document.getElementById('dropship_order_address2')
+        secondAddGB.value = "${copiedData[2]}"
+
+        let cityGB = document.getElementById('dropship_order_city')
+        cityGB.value = "${copiedData[3].split(',')[0]}"
+
+        let zipGB = document.getElementById('dropship_order_zip_code')
+        zipGB.value = "${copiedData[3].match(/[0-9]/gi).slice(0,5).join('')}"
+
+        let stateGB = document.getElementById('states_select')
+        stateGB.value = "${copiedData[3].split(',')[1].match(/[A-Z]/gi).join('')}"`,
+      });
+    } 
+
+    else {
+      chrome.tabs.executeScript(null, { code: `
+       let firstGB = document.getElementById('dropship_order_first_name')
+        firstGB.value = "${copiedData[0].split(' ')[0]}"
+
+        let lastGB = document.getElementById('dropship_order_last_name')
+        lastGB.value = "${copiedData[0].split(' ')[1]}"
+
+        let firstAddGB = document.getElementById('dropship_order_address1')
+        firstAddGB.value = "${copiedData[1]}"
+
+
         let cityGB = document.getElementById('dropship_order_city')
         cityGB.value = "${copiedData[2].split(',')[0]}"
 
         let zipGB = document.getElementById('dropship_order_zip_code')
-        zipGB.value = "${copiedData[2].match(/[0-9]/gi).slice(0,5).join('')}"
+        zipGB.value = "${copiedData[2]
+          .match(/[0-9]/gi)
+          .slice(0, 5)
+          .join('')}"
 
         let stateGB = document.getElementById('states_select')
-        stateGB.value = "${copiedData[2].split(',')[1].match(/[A-Z]/gi).join('')}"`,
-      });
-    });
+        stateGB.value = "${copiedData[2]
+          .split(',')[1]
+          .match(/[A-Z]/gi)
+          .join('')}"` })
+    }
+
+
+  });
   });
 });
 
