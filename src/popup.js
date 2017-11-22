@@ -1,17 +1,3 @@
-// // dropdown for country selector, <option value by iso2 country code
-// let countryDropdown = 'dropship_order_country'
-// // dropdown for state selection, M <option value = 'WA', 'OR'>, etc\
-// let stateDropdown = 'state_select'
-// let orderNumber = 'dropship_order_order_number'
-// let orderId = 'dropship_order_order_id'
-
-// // current website return
-// let page = window.location.href.includes('gearbubble.com') ? 'gearBubble' : 'gooten';
-
-// // array of ids to reference corresponding input
-// // current website return
-// let page = window.location.href.includes('gearbubble.com') ? 'gearBubble' : 'gooten';
-
 document.addEventListener('DOMContentLoaded', () => {
   const theStates = {
     AL: 'Alabama',
@@ -107,20 +93,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
-// // future array for input values to be pasted
-// let copyVals = [firstNameCopyVal, lastNameCopyVal, address1CopyVal, address2CopyVal, cityCopyVal, zipCopyVal,
-//   countryDropdownCopyVal, stateDropdownCopyVal, orderNumberCopyVal, orderIdCopyVal]
-
-// // populate inputs with copy data
-// // function populateInputs() {
-// //   if page === 'gearBubble'
-// //     idArr.map((id, index) => (document.getElementById(id).value = copyVals[index]))
-// // }
-
-// function click(e) {
-//   chrome.tabs.executeScript(null, {
-//     code: `document.body.style.backgroundColor='${e.target.id}'`,
-//   });
-//   window.close();
-// }
