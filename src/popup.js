@@ -1,13 +1,3 @@
-// // gearform -> https://www.gearbubble.com/dropship_order/shipping_info
-
-// //** Gearbubble.com ids **/
-// let firstName = 'dropship_order_first_name'
-// let lastName = 'dropship_order_last_name'
-// let address1 = 'dropship_order_address1'
-// let address2 = 'dropship_order_address2'
-// let city = 'dropship_order_city'
-// let zip = 'dropship_order_zip_code'
-
 // // dropdown for country selector, <option value by iso2 country code
 // let countryDropdown = 'dropship_order_country'
 // // dropdown for state selection, M <option value = 'WA', 'OR'>, etc\
@@ -22,14 +12,107 @@
 // // current website return
 // let page = window.location.href.includes('gearbubble.com') ? 'gearBubble' : 'gooten';
 
+document.addEventListener('DOMContentLoaded', () => {
+  const theStates = {
+    AL: 'Alabama',
+    AK: 'Alaska',
+    AZ: 'Arizona ',
+    AR: 'Arkansas',
+    CA: 'California ',
+    CO: 'Colorado ',
+    CT: 'Connecticut',
+    DE: 'Delaware',
+    DC: 'District Of Columbia',
+    FL: 'Florida',
+    GA: 'Georgia',
+    HI: 'Hawaii',
+    ID: 'Idaho',
+    IL: 'Illinois',
+    IN: 'Indiana',
+    IA: 'Iowa',
+    KS: 'Kansas',
+    KY: 'Kentucky',
+    LA: 'Louisiana',
+    ME: 'Maine',
+    MD: 'Maryland',
+    MA: 'Massachusetts',
+    MI: 'Michigan',
+    MN: 'Minnesota',
+    MS: 'Mississippi',
+    MO: 'Missouri',
+    MT: 'Montana',
+    NE: 'Nebraska',
+    NV: 'Nevada',
+    NH: 'New Hampshire',
+    NJ: 'New Jersey',
+    NM: 'New Mexico',
+    NY: 'New York',
+    NC: 'North Carolina',
+    ND: 'North Dakota',
+    OH: 'Ohio',
+    OK: 'Oklahoma',
+    OR: 'Oregon',
+    PA: 'Pennsylvania',
+    RI: 'Rhode Island',
+    SC: 'South Carolina',
+    SD: 'South Dakota',
+    TN: 'Tennessee',
+    TX: 'Texas',
+    UT: 'Utah',
+    VT: 'Vermont',
+    VA: 'Virginia ',
+    WA: 'Washington',
+    WV: 'West Virginia',
+    WI: 'Wisconsin',
+    WY: 'Wyoming',
+  };
+  const pasta = document.getElementById('clickme');
 
-document.getElementById('clickme').addEventListener('click', runSwitchjs)
+  chrome.storage.local.get('par', (data) => {
+    console.log(data.par);
+    const copiedData = data.par;
+    console.log(copiedData[0].split(' '));
+    const holder = document.getElementById('list');
+    holder.style.listStyleType = 'none';
+    copiedData.forEach((v) => {
+      const line = document.createElement('li');
+      line.innerText = v;
+      holder.appendChild(line);
+    });
+
+    pasta.addEventListener('click', (e) => {
+      console.log(copiedData[0]);
+      console.log(theStates[copiedData[2].split(',')[1].trim()]);
+
+      chrome.tabs.executeScript(null, {
+        code: `
+        let firstGB = document.getElementById('dropship_order_first_name')
+        firstGB.value = "${copiedData[0].split(' ')[0]}"
+
+        let lastGB = document.getElementById('dropship_order_last_name')
+        lastGB.value = "${copiedData[0].split(' ')[1]}"
+
+        let firstAddGB = document.getElementById('dropship_order_address1')
+        firstAddGB.value = "${copiedData[1]}"
+
+        let cityGB = document.getElementById('dropship_order_city')
+        cityGB.value = "${copiedData[2].split(',')[0]}"
+
+        let zipGB = document.getElementById('dropship_order_zip_code')
+        zipGB.value = "${copiedData[2].split(',')[2].trim()}"
+
+        let stateGB = document.getElementById('states_select')
+        stateGB.value = "${copiedData[2].split(',')[1].trim()}"`,
+      });
+    });
+  });
+});
 
 // // future array for input values to be pasted
-// let copyVals = [firstNameCopyVal, lastNameCopyVal, address1CopyVal, address2CopyVal, cityCopyVal, zipCopyVal, 
+// let copyVals = [firstNameCopyVal, lastNameCopyVal, address1CopyVal, address2CopyVal, cityCopyVal, zipCopyVal,
 //   countryDropdownCopyVal, stateDropdownCopyVal, orderNumberCopyVal, orderIdCopyVal]
 
-// // populate inputs with copy data 
+// // populate inputs with copy data
 // // function populateInputs() {
 // //   if page === 'gearBubble'
 // //     idArr.map((id, index) => (document.getElementById(id).value = copyVals[index]))
@@ -41,32 +124,3 @@ document.getElementById('clickme').addEventListener('click', runSwitchjs)
 //   });
 //   window.close();
 // }
-
-window.addEventListener('copy', (e) => {
-  const stored = [];
-  console.log(e);
-  const data = e.target.innerText;
-  const vals = ['name', 'street', 'city', 'state', 'zip'];
-  const par = data.split(',');
-  par.map(v => stored.push(v));
-  const address = {};
-  vals.forEach((v, i) => (address[v] = par[i]));
-  console.log('address', address);
-  chrome.extension.getBackgroundPage().console.log('whattt');
-
-  e.clipboardData.setData('text', par);
-  e.preventDefault();
-});
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   const divs = document.querySelectorAll('div');
-//   for (let i = 0; i < divs.length; i++) {
-//     divs[i].addEventListener('click', click);
-//   }
-// }page);
-
-function runSwitchjs() {
-  chrome.tabs.executeScript({
-    file: 'switch.js'
-  })
-}
