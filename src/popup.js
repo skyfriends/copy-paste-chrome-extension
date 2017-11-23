@@ -140,9 +140,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (copiedData.length > 4 && currentTab.includes('gooten')) {
           console.log('goot 1', currentTab);
-          chrome.tabs.executeScript(null, {
-            code: `
-        let inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
+          console.log('copiedData:', copiedData[3].split(',')[1].trim().match(/[A-Z]/gi).join('').toString())
+          console.log(document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid'))
+          console.log('****', document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid'))
+          chrome.tabs.executeScript(null, { code: `
+        inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
 
         let nameGOOT = inputArr[2]
         nameGOOT.value = "${copiedData[0]}"
@@ -164,16 +166,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let zipGOOT = inputArr[8]
         zipGOOT.value = "${copiedData[3]
-    .match(/[0-9]/gi)
-    .slice(0, 5)
-    .join('')}"
+          .match(/[0-9]/gi)
+          .slice(0, 5)
+          .join('')}"
 
-        let stateGOOT = document.getElementById('inputArr[6]')
-        stateGOOT.value = "${copiedData[3]
-    .split(',')[1]
-    .match(/[A-Z]/gi)
-    .join('')}"`,
-          });
+        let stateGOOT = inputArr[6]
+        stateGOOT.value = "string:${copiedData[3].split(',')[1].trim().match(/[A-Z]/gi).join('').toString()}"` })
         } else if (copiedData.length === 4 && currentTab.includes('gooten')) {
           console.log('goot 2', currentTab);
           chrome.tabs.executeScript(null, {
