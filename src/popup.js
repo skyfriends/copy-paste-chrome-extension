@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(currentTab);
 
       pasta.addEventListener('click', (e) => {
-        if (copiedData.length > 4 && currentTab.includes('gearbuddy')) {
+        if (copiedData.length > 4 && currentTab.includes('gearbubble')) {
           console.log('gb one', currentTab);
           chrome.tabs.executeScript(null, {
             code: `
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         } else if (
           copiedData.length === 4 &&
-          currentTab.includes('gearbuddy')
+          currentTab.includes('gearbubble')
         ) {
           console.log('gb 2', currentTab);
           chrome.tabs.executeScript(null, {
