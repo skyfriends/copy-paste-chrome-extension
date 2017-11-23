@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+  let nameGOOT = ''
+  let firstGB = ''
+  let lastGB = ''
+  let firstAddGB = ''
+  let cityGB = ''
+  let zipGB = ''
+  let stateGB = ''
+  let firstAddGOOT = ''
+  let secondAddGOOT = ''
+  let cityGOOT = ''
+  let phoneGOOT = ''
+  let emailGOOT = ''
+  let zipGOOT = ''
   const theStates = {
     AL: 'Alabama',
     AK: 'Alaska',
@@ -163,32 +176,33 @@ document.addEventListener('DOMContentLoaded', () => {
           chrome.tabs.executeScript(null, {
             code: `
         inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
-
-        let nameGOOT = inputArr[2]
+        changeClass = Object.assign([], inputArr)
+        changeClass.forEach(x => (x.className = 'form-control ng-valid ng-dirty ng-valid-parse ng-touched'))
+        nameGOOT = changeClass[2]
         nameGOOT.value = "${copiedData[0]}"
 
-        let firstAddGOOT = inputArr[3]
+        firstAddGOOT = changeClass[3]
         firstAddGOOT.value = "${copiedData[1]}"
 
-        let secondAddGOOT = inputArr[4]
+        secondAddGOOT = changeClass[4]
         secondAddGOOT.value = "${copiedData[2]}"
 
-        let cityGOOT = inputArr[5]
+        cityGOOT = changeClass[5]
         cityGOOT.value = "${copiedData[3].split(',')[0]}"
 
-        let phoneGOOT = inputArr[9]
+        phoneGOOT = changeClass[9]
         phoneGOOT.value = '555-555-5555'
 
-        let emailGOOT = inputArr[10]
+        emailGOOT = changeClass[10]
         emailGOOT.value = 'me@you.com'
 
-        let zipGOOT = inputArr[8]
+        zipGOOT = changeClass[8]
         zipGOOT.value = "${copiedData[3]
     .match(/[0-9]/gi)
     .slice(0, 5)
     .join('')}"
 
-        let stateGOOT = inputArr[6]
+        let stateGOOT = changeClass[6]
         stateGOOT.value = "string:${copiedData[3]
     .split(',')[1]
     .trim()
@@ -198,37 +212,37 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         } else if (copiedData.length === 4 && currentTab.includes('gooten')) {
           console.log('goot 2', currentTab);
-          chrome.tabs.executeScript(null, {
-            code: `
+          chrome.tabs.executeScript(null, { code: `
         inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
-
-        let nameGOOT = inputArr[2]
+        changeClass = Object.assign([], inputArr)
+        changeClass.forEach(x => (x.className = 'form-control ng-valid ng-dirty ng-valid-parse ng-touched'))
+        
+        nameGOOT = changeClass[1]
         nameGOOT.value = "${copiedData[0]}"
 
-        let firstAddGOOT = inputArr[3]
+        firstAddGOOT = changeClass[2]
         firstAddGOOT.value = "${copiedData[1]}"
 
-        let cityGOOT = inputArr[5]
+        cityGOOT = changeClass[4]
         cityGOOT.value = "${copiedData[2].split(',')[0]}"
 
-        let phoneGOOT = inputArr[9]
+        phoneGOOT = changeClass[8]
         phoneGOOT.value = '555-555-5555'
 
-        let emailGOOT = inputArr[10]
+        emailGOOT = changeClass[9]
         emailGOOT.value = 'me@you.com'
 
-        let zipGOOT = inputArr[8]
+        zipGOOT = changeClass[7]
         zipGOOT.value = "${copiedData[2]
-    .match(/[0-9]/gi)
-    .slice(0, 5)
-    .join('')}"
+          .match(/[0-9]/gi)
+          .slice(0, 5)
+          .join('')}"
 
-        let stateGOOT = inputArr[6]
+        stateGOOT = changeClass[5]
         stateGOOT.value = "string:${copiedData[2]
-    .split(',')[1]
-    .match(/[A-Z]/gi)
-    .join('')}"`,
-          });
+          .split(',')[1]
+          .match(/[A-Z]/gi)
+          .join('')}"` })
         }
       });
     });
