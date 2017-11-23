@@ -49,9 +49,8 @@ document.addEventListener('copy', (e) => {
   par.map(v => stored.push(v));
   const address = {};
   vals.forEach((v, i) => (address[v] = par[i]));
-  e.clipboardData.setData('text', JSON.stringify(par));
-  console.log(par);
-  console.log(JSON.stringify(par));
+  e.clipboardData.setData('text', data);
+  console.log('PAR', par.join(' '));
   const passed = { url: window.location.href, par };
   chrome.storage.local.set({ passed });
 
