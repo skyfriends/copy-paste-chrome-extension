@@ -212,37 +212,40 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         } else if (copiedData.length === 4 && currentTab.includes('gooten')) {
           console.log('goot 2', currentTab);
+          console.log('copiedData', copiedData)
+          
           chrome.tabs.executeScript(null, { code: `
         inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
         changeClass = Object.assign([], inputArr)
         changeClass.forEach(x => (x.className = 'form-control ng-valid ng-dirty ng-valid-parse ng-touched'))
         
-        nameGOOT = changeClass[1]
-        nameGOOT.value = "${copiedData[0]}"
+        nameGOOT = changeClass[1].focus()
+        document.execCommand('insertText', false, "${copiedData[0]}")
 
-        firstAddGOOT = changeClass[2]
-        firstAddGOOT.value = "${copiedData[1]}"
+        firstAddGOOT = changeClass[2].focus()
+        document.execCommand('insertText', false, "${copiedData[1]}")
+        
+        cityGOOT = changeClass[4].focus()
+        document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
 
-        cityGOOT = changeClass[4]
-        cityGOOT.value = "${copiedData[2].split(',')[0]}"
-
-        phoneGOOT = changeClass[8]
-        phoneGOOT.value = '555-555-5555'
-
-        emailGOOT = changeClass[9]
-        emailGOOT.value = 'me@you.com'
-
-        zipGOOT = changeClass[7]
-        zipGOOT.value = "${copiedData[2]
-          .match(/[0-9]/gi)
-          .slice(0, 5)
-          .join('')}"
-
-        stateGOOT = changeClass[5]
-        stateGOOT.value = "string:${copiedData[2]
+        stateGOOT = changeClass[5].focus()
+        document.execCommand('insertText', false, "string:${copiedData[2]
           .split(',')[1]
           .match(/[A-Z]/gi)
-          .join('')}"` })
+          .join('')}")
+
+        phoneGOOT = changeClass[8].focus()
+        document.execCommand('insertText', false, "555-555-5555")
+
+        emailGOOT = changeClass[9].focus()
+        document.execCommand('insertText', false, "me@you.com")
+
+        zipGOOT = changeClass[7].focus()
+        document.execCommand('insertText', false, "${copiedData[2]
+          .match(/[0-9]/gi)
+          .slice(0, 5)
+          .join('')}")
+        ` })
         }
       });
     });
