@@ -214,6 +214,10 @@ document.addEventListener('DOMContentLoaded', () => {
           console.log('goot 2', currentTab);
           console.log('copiedData', copiedData)
           
+          // ** for populating the state dropdown **
+          // jQuery(test)[0].options[2].selected = true
+          // jQuery(test).trigger('change')
+
           chrome.tabs.executeScript(null, { code: `
         inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
         changeClass = Object.assign([], inputArr)
