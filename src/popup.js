@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let phoneGOOT = ''
   let emailGOOT = ''
   let zipGOOT = ''
+  let optionsArrGOOT = []
   const theStates = {
     AL: 'Alabama',
     AK: 'Alaska',
@@ -231,12 +232,19 @@ document.addEventListener('DOMContentLoaded', () => {
         
         cityGOOT = changeClass[4].focus()
         document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
-
-        stateGOOT = changeClass[5].focus()
-        document.execCommand('insertText', false, "string:${copiedData[2]
+        
+        let stateSelectBox = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')[5]
+///// UNFINISHED
+        optionsArrGOOT = Array.from(document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')[5].options)
+        console.log('optionsArrGOOT ', optionsArrGOOT)
+        optionsArrGOOT = optionsArrGOOT.filter(x => x.value = "string:${copiedData[2]
           .split(',')[1]
           .match(/[A-Z]/gi)
           .join('')}")
+
+        stateGOOT = changeClass[5].indexOf(optionsArrGOOT)
+        changeClass[5][stateGOOT].selected = true
+        jQuery(changeClass[5]).trigger('change')
 
         phoneGOOT = changeClass[8].focus()
         document.execCommand('insertText', false, "555-555-5555")
