@@ -239,12 +239,15 @@ document.addEventListener('DOMContentLoaded', () => {
        console.log('optionsArrGOOT ', optionsArrGOOT)
     
 
-       console.log('optionsArrGOOT ****', optionsArrGOOT)
-       stateGOOT = optionsArrGOOT.findIndex(() => optionsArrGOOT.filter(x => x.value === "string:${copiedData[2]
-          .split(',')[1]
-          .match(/[A-Z]/gi)
-          .join('')}"))
-       stateSelectBox[stateGOOT].selected = true
+       stateGOOT = optionsArrGOOT.filter(x => x.value === "string:${copiedData[2]
+         .split(',')[1]
+         .match(/[A-Z]/gi)
+         .join('')}")
+
+        console.log('jQuery('jQuery(stateSelectBox)', jQuery(stateSelectBox))
+        console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox[stateGOOT[0].index]).selected = true)
+
+       jQuery(stateSelectBox[stateGOOT[0].index]).selected = true
        jQuery(stateSelectBox).trigger('change')
 
         phoneGOOT = changeClass[8].focus()
