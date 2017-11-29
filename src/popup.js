@@ -233,20 +233,19 @@ document.addEventListener('DOMContentLoaded', () => {
         cityGOOT = changeClass[4].focus()
         document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
         
-       // stateSelectBox = document.getElementsByClassName('form-control ng-valid ng-dirty ng-valid-parse ng-touched')[6].options
+       stateSelectBox = document.getElementsByClassName('form-control ng-valid ng-dirty ng-valid-parse ng-touched')[6].options
 ///// UNFINISHED
-       // optionsArrGOOT = Array.from(stateSelectBox)
-      //  console.log('optionsArrGOOT ', optionsArrGOOT)
+       optionsArrGOOT = Array.from(stateSelectBox)
+       console.log('optionsArrGOOT ', optionsArrGOOT)
     
 
- 
-      //  console.log('optionsArrGOOT ****', optionsArrGOOT)
-      //  stateGOOT = optionsArrGOOT.findIndex(() => optionsArrGOOT.filter(x => x.value === "string:${copiedData[2]
+       console.log('optionsArrGOOT ****', optionsArrGOOT)
+       stateGOOT = optionsArrGOOT.findIndex(() => optionsArrGOOT.filter(x => x.value === "string:${copiedData[2]
           .split(',')[1]
           .match(/[A-Z]/gi)
           .join('')}"))
-       // stateSelectBox[stateGOOT].selected = true
-      //  jQuery(stateSelectBox).trigger('change')
+       stateSelectBox[stateGOOT].selected = true
+       jQuery(stateSelectBox).trigger('change')
 
         phoneGOOT = changeClass[8].focus()
         document.execCommand('insertText', false, "555-555-5555")
