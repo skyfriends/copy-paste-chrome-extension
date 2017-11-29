@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let phoneGOOT = ''
   let emailGOOT = ''
   let zipGOOT = ''
+  let optionsArrGOOT = []
+  let stateSelectBox = ''
   const theStates = {
     AL: 'Alabama',
     AK: 'Alaska',
@@ -173,47 +175,50 @@ document.addEventListener('DOMContentLoaded', () => {
               'form-control ng-pristine ng-untouched ng-valid',
             ),
           );
-          chrome.tabs.executeScript(null, {
-            code: `
+          chrome.tabs.executeScript(null, { code: `
         inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
         changeClass = Object.assign([], inputArr)
         changeClass.forEach(x => (x.className = 'form-control ng-valid ng-dirty ng-valid-parse ng-touched'))
-        nameGOOT = changeClass[2]
-        nameGOOT.value = "${copiedData[0]}"
+        
+        nameGOOT = changeClass[2].focus()
+        document.execCommand('insertText', false, "${copiedData[0]}")
 
-        firstAddGOOT = changeClass[3]
-        firstAddGOOT.value = "${copiedData[1]}"
+        firstAddGOOT = changeClass[3].focus()
+        document.execCommand('insertText', false, "${copiedData[1]}")
 
-        secondAddGOOT = changeClass[4]
-        secondAddGOOT.value = "${copiedData[2]}"
+        secondAddGOOT = changeClass[4].focus()
+        document.execCommand('insertText', false, "${copiedData[2]}")
 
-        cityGOOT = changeClass[5]
-        cityGOOT.value = "${copiedData[3].split(',')[0]}"
+        cityGOOT = changeClass[5].focus()
+        document.execCommand('insertText', false, "${copiedData[3].split(',')[0]}")
 
-        phoneGOOT = changeClass[9]
-        phoneGOOT.value = '555-555-5555'
+        phoneGOOT = changeClass[9].focus()
+        document.execCommand('insertText', false, "555-555-5555")
 
-        emailGOOT = changeClass[10]
-        emailGOOT.value = 'me@you.com'
+        emailGOOT = changeClass[10].focus()
+        document.execCommand('insertText', false, "me@you.com")
 
-        zipGOOT = changeClass[8]
-        zipGOOT.value = "${copiedData[3]
-    .match(/[0-9]/gi)
-    .slice(0, 5)
-    .join('')}"
+        zipGOOT = changeClass[8].focus()
+        document.execCommand('insertText', false, "${copiedData[3]
+          .match(/[0-9]/gi)
+          .slice(0, 5)
+          .join('')}")
 
         let stateGOOT = changeClass[6]
         stateGOOT.value = "string:${copiedData[3]
-    .split(',')[1]
-    .trim()
-    .match(/[A-Z]/gi)
-    .join('')
-    .toString()}"`,
-          });
+          .split(',')[1]
+          .trim()
+          .match(/[A-Z]/gi)
+          .join('')
+          .toString()}"` })
         } else if (copiedData.length === 4 && currentTab.includes('gooten')) {
           console.log('goot 2', currentTab);
           console.log('copiedData', copiedData)
           
+          // ** for populating the state dropdown **
+          // jQuery(test)[0].options[2].selected = true
+          // jQuery(test).trigger('change')
+
           chrome.tabs.executeScript(null, { code: `
         inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
         changeClass = Object.assign([], inputArr)
@@ -227,12 +232,21 @@ document.addEventListener('DOMContentLoaded', () => {
         
         cityGOOT = changeClass[4].focus()
         document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
+        
+       // stateSelectBox = document.getElementsByClassName('form-control ng-valid ng-dirty ng-valid-parse ng-touched')[6].options
+///// UNFINISHED
+       // optionsArrGOOT = Array.from(stateSelectBox)
+      //  console.log('optionsArrGOOT ', optionsArrGOOT)
+    
 
-        stateGOOT = changeClass[5].focus()
-        document.execCommand('insertText', false, "string:${copiedData[2]
+ 
+      //  console.log('optionsArrGOOT ****', optionsArrGOOT)
+      //  stateGOOT = optionsArrGOOT.findIndex(() => optionsArrGOOT.filter(x => x.value === "string:${copiedData[2]
           .split(',')[1]
           .match(/[A-Z]/gi)
-          .join('')}")
+          .join('')}"))
+       // stateSelectBox[stateGOOT].selected = true
+      //  jQuery(stateSelectBox).trigger('change')
 
         phoneGOOT = changeClass[8].focus()
         document.execCommand('insertText', false, "555-555-5555")
