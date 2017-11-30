@@ -233,9 +233,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cityGOOT = changeClass[4].focus()
         document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
         
-       stateSelectBox = document.getElementsByClassName('form-control ng-valid ng-dirty ng-valid-parse ng-touched')[6].options
+       stateSelectBox = document.getElementsByClassName('form-control ng-valid ng-dirty ng-valid-parse ng-touched')[6]
 ///// UNFINISHED
-       optionsArrGOOT = Array.from(stateSelectBox)
+       optionsArrGOOT = Array.from(stateSelectBox.options)
        console.log('optionsArrGOOT ', optionsArrGOOT)
     
 
@@ -244,10 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
          .match(/[A-Z]/gi)
          .join('')}")
 
-        console.log('jQuery('jQuery(stateSelectBox)', jQuery(stateSelectBox))
-        console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox[stateGOOT[0].index]).selected = true)
-
-       jQuery(stateSelectBox[stateGOOT[0].index]).selected = true
+        console.log( 'jQuery(jQuery(stateSelectBox))' , jQuery(stateSelectBox) )
+        console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox)[0])
+        console.log('stateGOOT ', stateGOOT)
+      
+       jQuery(stateSelectBox)[0][stateGOOT[0].index].selected = true
+      //  jQuery(stateSelectBox[stateGOOT[0].index]).selected = true
        jQuery(stateSelectBox).trigger('change')
 
         phoneGOOT = changeClass[8].focus()
