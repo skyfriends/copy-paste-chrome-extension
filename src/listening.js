@@ -17,7 +17,7 @@ let changeClass = ''
 
 //* * gearbubble.com ids **/
 
-const page = window.location.href;
+let page = window.location.href;
 
 if (page.includes('gearbubble')) {
   
@@ -47,19 +47,19 @@ if (page.includes('gearbubble')) {
 console.log(firstName);
 
 document.addEventListener('copy', (e) => {
-  const stored = [];
-  // const data = e.target.innerText;
-  const data = window.getSelection().toString();
+  let stored = [];
+  // let data = e.target.innerText;
+  let data = window.getSelection().toString();
   console.log('data ', data);
-  const vals = ['name', 'street', 'city', 'state', 'zip'];
-  const par = data.split('\n');
+  let vals = ['name', 'street', 'city', 'state', 'zip'];
+  let par = data.split('\n');
 
   par.map(v => stored.push(v));
-  const address = {};
+  let address = {};
   vals.forEach((v, i) => (address[v] = par[i]));
   e.clipboardData.setData('text', data);
   console.log('PAR', par.join(' '));
-  const passed = { url: window.location.href, par };
+  let passed = { url: window.location.href, par };
   chrome.storage.local.set({ passed });
 
   console.log(par[0].split(' '));

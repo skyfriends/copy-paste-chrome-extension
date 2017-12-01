@@ -93,19 +93,24 @@ window.addEventListener('load', () => {
     chrome.storage.local.get('passed', (data) => {
       console.log(data.passed);
       console.log(data);
-      const copiedData = data.passed.par;
+      let copiedData = data.passed.par;
       console.log('*****', copiedData); 
       console.log(copiedData[0].split(' '));
       console.log('copiedData after split', copiedData)      
       const holder = document.getElementById('list');
       holder.style.listStyleType = 'none';
       copiedData.forEach((v) => {
-        const line = document.createElement('li');
+        let line = document.createElement('li');
         line.innerText = v;
         holder.appendChild(line);
       });
 
-      console.log(currentTab);
+      console.log('copiedData before click', copiedData);
+      // copiedData = Array.from(copiedData)
+      // copiedData.push(copiedData[3].match(/[0-9-]/gi).join(''))
+      copiedData.push(copiedData[copiedData.length - 1].match(/[0-9]/gi).slice(0, 5).join(''))
+      console.log('copiedData after click', copiedData)
+      
 
       pasta.addEventListener('click', (e) => {
         if (copiedData.length > 4 && currentTab.includes('gearbubble')) {
@@ -175,27 +180,8 @@ window.addEventListener('load', () => {
 
         if (copiedData.length > 4 && currentTab.includes('gooten')) {
           
-          console.log('goot 1', currentTab);
-          console.log(
-            'copiedData:',
-            copiedData[3]
-              .split(',')[1]
-              .trim()
-              .match(/[A-Z]/gi)
-              .join('')
-              .toString(),
-          );
-          console.log(
-            document.getElementsByClassName(
-              'form-control ng-pristine ng-untouched ng-valid',
-            ),
-          );
-          console.log(
-            '****',
-            document.getElementsByClassName(
-              'form-control ng-pristine ng-untouched ng-valid',
-            ),
-          );
+          console.log('goot 1 *copiedData*', copiedData);
+          
           chrome.tabs.executeScript(null, { code: `
           applyButton = document.getElementsByClassName('btn btn-default')[1]
           applyButton.focus()
@@ -211,10 +197,10 @@ window.addEventListener('load', () => {
         document.execCommand('insertText', false, "${copiedData[1]}")
         
         secondAddGOOT = changeClass[3].focus()
-        document.execCommand('insertText', false, "${copiedData[1]}")
+        document.execCommand('insertText', false, "${copiedData[2]}")
 
         cityGOOT = changeClass[4].focus()
-        document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
+        document.execCommand('insertText', false, "${copiedData[3].split(',')[0]}")
         
         stateSelectBox = document.getElementsByTagName('select')[3]
 
@@ -223,12 +209,12 @@ window.addEventListener('load', () => {
     
 
 
-        // console.log( 'jQuery(jQuery(stateSelectBox))' , jQuery(stateSelectBox) )
-        // console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox)[0])
-        // console.log('stateGOOT ', stateGOOT)
+      // console.log( 'jQuery(jQuery(stateSelectBox))' , jQuery(stateSelectBox) )
+      // console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox)[0])
+      // console.log('stateGOOT ', stateGOOT)
       
-       jQuery(stateSelectBox)[stateGOOT[0].index].selected = true
-       jQuery(stateSelectBox).trigger('change')
+     //  jQuery(stateSelectBox)[stateGOOT[0].index].selected = true
+     //  jQuery(stateSelectBox).trigger('change')
       //  console.log('jQuery(stateSelectBox).trigger('change') ', jQuery(stateSelectBox).trigger('change'))
 
         phoneGOOT = changeClass[6].focus()
@@ -238,10 +224,7 @@ window.addEventListener('load', () => {
         document.execCommand('insertText', false, "me@you.com")
 
         zipGOOT = changeClass[5].focus()
-        document.execCommand('insertText', false, "${copiedData[2]
-          .match(/[0-9]/gi)
-          .slice(0, 5)
-          .join('')}")
+        document.execCommand('insertText', false, "${copiedData[4]}")
         ` })
         } else if (copiedData.length === 4 && currentTab.includes('gooten')) {
           console.log('goot 2', currentTab);
