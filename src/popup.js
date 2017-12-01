@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
+  console.log('All resources finished loading')
+
   let nameGOOT = ''
   let firstGB = ''
   let lastGB = ''
@@ -14,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let zipGOOT = ''
   let optionsArrGOOT = []
   let stateSelectBox = ''
+  let applyButton;
+
   const theStates = {
     AL: 'Alabama',
     AK: 'Alaska',
@@ -154,6 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (copiedData.length > 4 && currentTab.includes('gooten')) {
+          
           console.log('goot 1', currentTab);
           console.log(
             'copiedData:',
@@ -178,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
           chrome.tabs.executeScript(null, { code: `
         inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
         changeClass = Object.assign([], inputArr)
-        changeClass.forEach(x => (x.className = 'form-control ng-valid ng-dirty ng-valid-parse ng-touched'))
         
         nameGOOT = changeClass[2].focus()
         document.execCommand('insertText', false, "${copiedData[0]}")
@@ -218,11 +222,14 @@ document.addEventListener('DOMContentLoaded', () => {
           // ** for populating the state dropdown **
           // jQuery(test)[0].options[2].selected = true
           // jQuery(test).trigger('change')
-
+          
           chrome.tabs.executeScript(null, { code: `
-        inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
+          applyButton = document.getElementsByClassName('btn btn-default')[1]
+          applyButton.focus()
+          applyButton.click()
+
+        inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid invalid')
         changeClass = Object.assign([], inputArr)
-        changeClass.forEach(x => (x.className = 'form-control ng-valid ng-dirty ng-valid-parse ng-touched'))
         
         nameGOOT = changeClass[1].focus()
         document.execCommand('insertText', false, "${copiedData[0]}")
@@ -233,8 +240,8 @@ document.addEventListener('DOMContentLoaded', () => {
         cityGOOT = changeClass[4].focus()
         document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
         
-       stateSelectBox = document.getElementsByClassName('form-control ng-valid ng-dirty ng-valid-parse ng-touched')[6]
-///// UNFINISHED
+        stateSelectBox = stateBox = document.getElementsByTagName('select')[3]
+
        optionsArrGOOT = Array.from(stateSelectBox.options)
        console.log('optionsArrGOOT ', optionsArrGOOT)
     
@@ -244,13 +251,13 @@ document.addEventListener('DOMContentLoaded', () => {
          .match(/[A-Z]/gi)
          .join('')}")
 
-        console.log( 'jQuery(jQuery(stateSelectBox))' , jQuery(stateSelectBox) )
-        console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox)[0])
-        console.log('stateGOOT ', stateGOOT)
+        // console.log( 'jQuery(jQuery(stateSelectBox))' , jQuery(stateSelectBox) )
+        // console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox)[0])
+        // console.log('stateGOOT ', stateGOOT)
       
        jQuery(stateSelectBox)[0][stateGOOT[0].index].selected = true
-      //  jQuery(stateSelectBox[stateGOOT[0].index]).selected = true
        jQuery(stateSelectBox).trigger('change')
+      //  console.log('jQuery(stateSelectBox).trigger('change') ', jQuery(stateSelectBox).trigger('change'))
 
         phoneGOOT = changeClass[8].focus()
         document.execCommand('insertText', false, "555-555-5555")
@@ -269,3 +276,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+

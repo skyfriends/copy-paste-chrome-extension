@@ -32,6 +32,7 @@ if (page.includes('gearbubble')) {
   inputArr = document.getElementsByClassName(
     'form-control ng-pristine ng-untouched ng-valid',
   );
+  
   changeClass = Object.assign([], inputArr)
   changeClass.forEach(x => (x.className = 'form-control ng-valid ng-dirty ng-valid-parse ng-touched'))
   name = changeClass[2];
