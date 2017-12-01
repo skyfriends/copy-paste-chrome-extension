@@ -228,7 +228,7 @@ window.addEventListener('load', () => {
           applyButton.focus()
           applyButton.click()
 
-        inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid invalid')
+        inputArr = document.getElementsByTagName('input')
         changeClass = Object.assign([], inputArr)
         
         nameGOOT = changeClass[1].focus()
@@ -240,7 +240,7 @@ window.addEventListener('load', () => {
         cityGOOT = changeClass[4].focus()
         document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
         
-        stateSelectBox = stateBox = document.getElementsByTagName('select')[3]
+        stateSelectBox = document.getElementsByTagName('select')[3]
 
        optionsArrGOOT = Array.from(stateSelectBox.options)
        console.log('optionsArrGOOT ', optionsArrGOOT)
@@ -259,13 +259,13 @@ window.addEventListener('load', () => {
        jQuery(stateSelectBox).trigger('change')
       //  console.log('jQuery(stateSelectBox).trigger('change') ', jQuery(stateSelectBox).trigger('change'))
 
-        phoneGOOT = changeClass[8].focus()
+        phoneGOOT = changeClass[6].focus()
         document.execCommand('insertText', false, "555-555-5555")
 
-        emailGOOT = changeClass[9].focus()
+        emailGOOT = changeClass[7].focus()
         document.execCommand('insertText', false, "me@you.com")
 
-        zipGOOT = changeClass[7].focus()
+        zipGOOT = changeClass[5].focus()
         document.execCommand('insertText', false, "${copiedData[2]
           .match(/[0-9]/gi)
           .slice(0, 5)
