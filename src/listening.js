@@ -1,5 +1,5 @@
 //* * gooten.com inputs **/
-let inputArr = '';
+
 let name = '';
 let address1 = '';
 let address2 = '';
@@ -8,14 +8,14 @@ let state = '';
 let zip = '';
 let phone = '';
 let email = '';
-
+let firstName = '';
+let lastName = '';
+let inputArr;
 let changeClass = ''
 // let inputArr = [name, address1, address2, city, state, zip, phone, email]
 // let submitButton = document.getElementsByClassName('btn btn-default')[1]
 
 //* * gearbubble.com ids **/
-let firstName = '';
-let lastName = '';
 
 const page = window.location.href;
 

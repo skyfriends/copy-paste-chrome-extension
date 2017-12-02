@@ -1,6 +1,21 @@
 window.addEventListener('load', () => {
   console.log('All resources finished loading')
 
+
+  // let name = ''
+  // let address1 = ''
+  // let address2 = ''
+  // let city = ''
+  // let state = ''
+  // let zip = ''
+  // let phone = ''
+  // let email = ''
+  // let firstName = ''
+  // let lastName = ''
+  // let changeClass = ''
+  // const page = window.location.href
+  ////////////////////////////////////////
+  let inputArr = ''
   let nameGOOT = ''
   let firstGB = ''
   let lastGB = ''
@@ -79,8 +94,9 @@ window.addEventListener('load', () => {
       console.log(data.passed);
       console.log(data);
       const copiedData = data.passed.par;
-      console.log('*****', copiedData);
+      console.log('*****', copiedData); 
       console.log(copiedData[0].split(' '));
+      console.log('copiedData after split', copiedData)      
       const holder = document.getElementById('list');
       holder.style.listStyleType = 'none';
       copiedData.forEach((v) => {
@@ -181,40 +197,52 @@ window.addEventListener('load', () => {
             ),
           );
           chrome.tabs.executeScript(null, { code: `
-        inputArr = document.getElementsByClassName('form-control ng-pristine ng-untouched ng-valid')
+          applyButton = document.getElementsByClassName('btn btn-default')[1]
+          applyButton.focus()
+          applyButton.click()
+
+        inputArr = document.getElementsByTagName('input')
         changeClass = Object.assign([], inputArr)
         
-        nameGOOT = changeClass[2].focus()
+        nameGOOT = changeClass[1].focus()
         document.execCommand('insertText', false, "${copiedData[0]}")
 
-        firstAddGOOT = changeClass[3].focus()
+        firstAddGOOT = changeClass[2].focus()
+        document.execCommand('insertText', false, "${copiedData[1]}")
+        
+        secondAddGOOT = changeClass[3].focus()
         document.execCommand('insertText', false, "${copiedData[1]}")
 
-        secondAddGOOT = changeClass[4].focus()
-        document.execCommand('insertText', false, "${copiedData[2]}")
+        cityGOOT = changeClass[4].focus()
+        document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
+        
+        stateSelectBox = document.getElementsByTagName('select')[3]
 
-        cityGOOT = changeClass[5].focus()
-        document.execCommand('insertText', false, "${copiedData[3].split(',')[0]}")
+      // optionsArrGOOT = Array.from(stateSelectBox.options)
+      // console.log('optionsArrGOOT ', optionsArrGOOT)
+    
 
-        phoneGOOT = changeClass[9].focus()
+
+        // console.log( 'jQuery(jQuery(stateSelectBox))' , jQuery(stateSelectBox) )
+        // console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox)[0])
+        // console.log('stateGOOT ', stateGOOT)
+      
+       jQuery(stateSelectBox)[stateGOOT[0].index].selected = true
+       jQuery(stateSelectBox).trigger('change')
+      //  console.log('jQuery(stateSelectBox).trigger('change') ', jQuery(stateSelectBox).trigger('change'))
+
+        phoneGOOT = changeClass[6].focus()
         document.execCommand('insertText', false, "555-555-5555")
 
-        emailGOOT = changeClass[10].focus()
+        emailGOOT = changeClass[7].focus()
         document.execCommand('insertText', false, "me@you.com")
 
-        zipGOOT = changeClass[8].focus()
-        document.execCommand('insertText', false, "${copiedData[3]
+        zipGOOT = changeClass[5].focus()
+        document.execCommand('insertText', false, "${copiedData[2]
           .match(/[0-9]/gi)
           .slice(0, 5)
           .join('')}")
-
-        let stateGOOT = changeClass[6]
-        stateGOOT.value = "string:${copiedData[3]
-          .split(',')[1]
-          .trim()
-          .match(/[A-Z]/gi)
-          .join('')
-          .toString()}"` })
+        ` })
         } else if (copiedData.length === 4 && currentTab.includes('gooten')) {
           console.log('goot 2', currentTab);
           console.log('copiedData', copiedData)
@@ -244,19 +272,15 @@ window.addEventListener('load', () => {
 
        optionsArrGOOT = Array.from(stateSelectBox.options)
        console.log('optionsArrGOOT ', optionsArrGOOT)
-    
 
-       stateGOOT = optionsArrGOOT.filter(x => x.value === "string:${copiedData[2]
-         .split(',')[1]
-         .match(/[A-Z]/gi)
-         .join('')}")
+
 
         // console.log( 'jQuery(jQuery(stateSelectBox))' , jQuery(stateSelectBox) )
         // console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox)[0])
         // console.log('stateGOOT ', stateGOOT)
       
-       jQuery(stateSelectBox)[0][stateGOOT[0].index].selected = true
-       jQuery(stateSelectBox).trigger('change')
+      //  jQuery(stateSelectBox)[0][stateGOOT[0].index].selected = true
+      //  jQuery(stateSelectBox).trigger('change')
       //  console.log('jQuery(stateSelectBox).trigger('change') ', jQuery(stateSelectBox).trigger('change'))
 
         phoneGOOT = changeClass[6].focus()
