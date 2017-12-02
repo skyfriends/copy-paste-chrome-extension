@@ -32,6 +32,7 @@ window.addEventListener('load', () => {
   let optionsArrGOOT = []
   let stateSelectBox = ''
   let applyButton;
+  let stateGOOT
 
   const theStates = {
     AL: 'Alabama',
@@ -179,13 +180,27 @@ window.addEventListener('load', () => {
         }
 
         if (copiedData.length > 4 && currentTab.includes('gooten')) {
-          
+          stateGOOT = copiedData[2]
+            .split(',')[1]
+            .match(/[A-Z]/gi)
+            .join('')
+
           console.log('goot 1 *copiedData*', copiedData);
           
           chrome.tabs.executeScript(null, { code: `
           applyButton = document.getElementsByClassName('btn btn-default')[1]
           applyButton.focus()
           applyButton.click()
+
+          stateSelectBox = document.getElementsByTagName('select')[3]
+          optionsArrGOOT = Array.from(stateSelectBox.options)
+          
+
+            
+          optionsArrGOOT.filter(x => x.value === "string:${stateGOOT}")[0].selected = true
+          console.log('optionsArrGOOT ', optionsArrGOOT)
+      
+          $(stateSelectBox)[0].dispatchEvent(new Event("change"))
 
         inputArr = document.getElementsByTagName('input')
         changeClass = Object.assign([], inputArr)
@@ -206,16 +221,6 @@ window.addEventListener('load', () => {
 
       // optionsArrGOOT = Array.from(stateSelectBox.options)
       // console.log('optionsArrGOOT ', optionsArrGOOT)
-    
-
-
-      // console.log( 'jQuery(jQuery(stateSelectBox))' , jQuery(stateSelectBox) )
-      // console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox)[0])
-      // console.log('stateGOOT ', stateGOOT)
-      
-     //  jQuery(stateSelectBox)[stateGOOT[0].index].selected = true
-     //  jQuery(stateSelectBox).trigger('change')
-      //  console.log('jQuery(stateSelectBox).trigger('change') ', jQuery(stateSelectBox).trigger('change'))
 
         phoneGOOT = changeClass[6].focus()
         document.execCommand('insertText', false, "555-555-5555")
@@ -225,6 +230,9 @@ window.addEventListener('load', () => {
 
         zipGOOT = changeClass[5].focus()
         document.execCommand('insertText', false, "${copiedData[4]}")
+        
+          applyButton.focus()
+          applyButton.click()
         ` })
         } else if (copiedData.length === 4 && currentTab.includes('gooten')) {
           console.log('goot 2', currentTab);
@@ -233,11 +241,24 @@ window.addEventListener('load', () => {
           // ** for populating the state dropdown **
           // jQuery(test)[0].options[2].selected = true
           // jQuery(test).trigger('change')
+
+            stateGOOT = copiedData[2]
+            .split(',')[1]
+            .match(/[A-Z]/gi)
+            .join('')
           
           chrome.tabs.executeScript(null, { code: `
           applyButton = document.getElementsByClassName('btn btn-default')[1]
           applyButton.focus()
           applyButton.click()
+
+          stateSelectBox = document.getElementsByTagName('select')[3]
+          optionsArrGOOT = Array.from(stateSelectBox.options)
+          
+          optionsArrGOOT.filter(x => x.value === "string:${stateGOOT}")[0].selected = true
+          console.log('optionsArrGOOT ', optionsArrGOOT)
+      
+          $(stateSelectBox)[0].dispatchEvent(new Event("change"))
 
         inputArr = document.getElementsByTagName('input')
         changeClass = Object.assign([], inputArr)
@@ -250,21 +271,6 @@ window.addEventListener('load', () => {
         
         cityGOOT = changeClass[4].focus()
         document.execCommand('insertText', false, "${copiedData[2].split(',')[0]}")
-        
-        stateSelectBox = document.getElementsByTagName('select')[3]
-
-       optionsArrGOOT = Array.from(stateSelectBox.options)
-       console.log('optionsArrGOOT ', optionsArrGOOT)
-
-
-
-        // console.log( 'jQuery(jQuery(stateSelectBox))' , jQuery(stateSelectBox) )
-        // console.log('jQuery(stateSelectBox[stateGOOT[0].index]).selected = true ****', jQuery(stateSelectBox)[0])
-        // console.log('stateGOOT ', stateGOOT)
-      
-      //  jQuery(stateSelectBox)[0][stateGOOT[0].index].selected = true
-      //  jQuery(stateSelectBox).trigger('change')
-      //  console.log('jQuery(stateSelectBox).trigger('change') ', jQuery(stateSelectBox).trigger('change'))
 
         phoneGOOT = changeClass[6].focus()
         document.execCommand('insertText', false, "555-555-5555")
@@ -277,6 +283,10 @@ window.addEventListener('load', () => {
           .match(/[0-9]/gi)
           .slice(0, 5)
           .join('')}")
+
+          applyButton.focus()
+          applyButton.click()
+
         ` })
         }
       });
