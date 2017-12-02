@@ -180,7 +180,8 @@ window.addEventListener('load', () => {
         }
 
         if (copiedData.length > 4 && currentTab.includes('gooten')) {
-          stateGOOT = copiedData[2]
+
+          stateGOOT = copiedData[3]
             .split(',')[1]
             .match(/[A-Z]/gi)
             .join('')
