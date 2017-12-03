@@ -31,13 +31,13 @@ window.addEventListener('load', () => {
       pasta.addEventListener('click', (e) => {
 
         if (currentTab.includes('gearbubble')) {
-          letfirstGB = document.getElementById('dropship_order_first_name')
-          letlastGB = document.getElementById('dropship_order_last_name')
-          letfirstAddGB = document.getElementById('dropship_order_address1')
-          letsecondAddGB = document.getElementById('dropship_order_address2')
-          letcityGB = document.getElementById('dropship_order_city')
-          letzipGB = document.getElementById('dropship_order_zip_code')
-          letstateGB = document.getElementById('states_select')
+          let firstGB = document.getElementById('dropship_order_first_name')
+          let lastGB = document.getElementById('dropship_order_last_name')
+          let firstAddGB = document.getElementById('dropship_order_address1')
+          let secondAddGB = document.getElementById('dropship_order_address2')
+          let cityGB = document.getElementById('dropship_order_city')
+          let zipGB = document.getElementById('dropship_order_zip_code')
+          let stateGB = document.getElementById('states_select')
 
           if (copiedData.length > 4) {
             console.log('gb one', currentTab)
@@ -61,27 +61,24 @@ window.addEventListener('load', () => {
          else if (copiedData.length === 4) {
           console.log('gb 2', currentTab);
           
-          chrome.tabs.executeScript(null, {
-            code: `
+          // chrome.tabs.executeScript(null, {
+          //   code: `
             firstGB.value = "${copiedData[0].split(' ')[0]}"
             lastGB.value = "${copiedData[0].split(' ')[1]}"
             firstAddGB.value = "${copiedData[1]}"
             cityGB.value = "${copiedData[2].split(',')[0]}"
-            zipGB.value = "${copiedData[2]
-              .match(/[0-9]/gi)
-              .slice(0, 5)
-              .join('')}"
-            stateGB.value = "${copiedData[2]
-              .split(',')[1]
-              .match(/[A-Z]/gi)
-              .join('')}"`,
-                    });
+            zipGB.value = "${copiedData[2].match(/[0-9]/gi).slice(0, 5).join('')}"
+            stateGB.value = "${copiedData[2].split(',')[1].match(/[A-Z]/gi).join('')}"
+          //     `,
+          //           });
                   }
                 } 
         if (currentTab.includes('gooten')) {
+          
           inputArr = document.getElementsByTagName('input')
           changeClass = Object.assign([], inputArr)
-          stateSelectBox = document.getElementsByTagName('select')[3]
+          let stateSelectBox = document.getElementsByTagName('select')[3]
+          console.log('stateSelectBox ', stateSelectBox)
           optionsArrGOOT = Array.from(stateSelectBox.options)
           $(stateSelectBox)[0].dispatchEvent(new Event('change'))
           phoneGOOT = changeClass[6].focus()
