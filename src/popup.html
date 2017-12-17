@@ -1,28 +1,14 @@
-<!-- <!doctype html>
-<html>
-  <head>
-    <title>Set Page Color Popup</title>
-    <link rel="stylesheet" type="text/css" href="./style.css">
-    <script src="popup.js"></script>
-  </head>
-  <body>
-    <div id="red">red</div>
-    <div id="blue">blue</div>
-    <div id="green">green</div>
-    <div id="yellow">yellow</div>
-  </body>
-</html> -->
-
 <!DOCTYPE html>
-<html>
+<html ng-csp ng-app="MyApp">
 
 <head>
+  <script type="text/javascript" src="jquery.js"></script>
+  
   <style>
     body {
       height: 150px;
       width: 220px;
     }
-
     .wrapper {
       text-align: center;
     }
@@ -34,8 +20,7 @@
     <button id="clickme">PASTE IT</button>
     <div id="list"></div>
   </div>
-  <script type="text/javascript" src="jquery.js"></script>
-  <script type="text/javascript" src="./popup.js"></script>
+  <script type="text/javascript" src="popup.js"></script>
 </body>
 
 </html>
