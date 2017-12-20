@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Copy Pasta",
   "description": "Copy/paste addy!",
-  "version": "1.0",
+  "version": "1.2",
   "icons": {
     "48": "icon.png"
   },
