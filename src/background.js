@@ -8,7 +8,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 // chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 //   // LOG THE CONTENTS HERE
-//   console.log(request.content)
+  let beans = 'COOOOOOOOOONNNNTTTTTTEWWN'
 // })
 
 // chrome.tabs.getSelected(null, function(tab) {

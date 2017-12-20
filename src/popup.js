@@ -1,7 +1,7 @@
 window.addEventListener('load', () => {
   console.log('All resources finished loading')
 
-
+chrome.extension.getBackgroundPage().console.log('beans would be hereerrerr')
   // let name = ''
   // let address1 = ''
   // let address2 = ''
