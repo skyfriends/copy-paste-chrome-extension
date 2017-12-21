@@ -32,7 +32,7 @@ window.addEventListener('load', () => {
   let optionsArrGOOT = []
   let stateSelectBox = ''
   let applyButton;
-  let stateGOOT
+  let stateGOOT = ''
 
   const theStates = {
     AL: 'Alabama',
@@ -180,7 +180,8 @@ window.addEventListener('load', () => {
         }
 
         if (copiedData.length > 4 && currentTab.includes('gooten')) {
-          stateGOOT = copiedData[2]
+          console.log('copiedData in goot ', copiedData)
+          stateGOOT = copiedData[3]
             .split(',')[1]
             .match(/[A-Z]/gi)
             .join('')
@@ -194,8 +195,6 @@ window.addEventListener('load', () => {
 
           stateSelectBox = document.getElementsByTagName('select')[3]
           optionsArrGOOT = Array.from(stateSelectBox.options)
-          
-
             
           optionsArrGOOT.filter(x => x.value === "string:${stateGOOT}")[0].selected = true
           console.log('optionsArrGOOT ', optionsArrGOOT)
@@ -204,7 +203,7 @@ window.addEventListener('load', () => {
 
         inputArr = document.getElementsByTagName('input')
         changeClass = Object.assign([], inputArr)
-        
+        console.log('changeClass', changeClass)
         nameGOOT = changeClass[1].focus()
         document.execCommand('insertText', false, "${copiedData[0]}")
 
@@ -248,6 +247,7 @@ window.addEventListener('load', () => {
             .join('')
           
           chrome.tabs.executeScript(null, { code: `
+          console.log('goot 2 exec script')
           applyButton = document.getElementsByClassName('btn btn-default')[1]
           applyButton.focus()
           applyButton.click()
