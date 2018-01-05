@@ -60,6 +60,8 @@ document.addEventListener('copy', (e) => {
   e.clipboardData.setData('text', data);
   console.log('PAR', par.join(' '));
   let passed = { url: window.location.href, par };
+  console.log('PASSSSSSSED ', passed);
+  
   chrome.storage.local.set({ passed });
 
   console.log(par[0].split(' '));

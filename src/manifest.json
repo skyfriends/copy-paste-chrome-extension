@@ -7,7 +7,7 @@
     "48": "icon.png"
   },
   "background": {
-    "scripts": ["jquery.js", "background.js", "popup.js"],
+    "scripts": ["popup.js", "jquery.js", "background.js" ],
     "persistent": false
   },
   "permissions": ["tabs", "<all_urls>", "storage"],
