@@ -1,10 +1,10 @@
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo && changeInfo.status == 'complete') {
-    chrome.tabs.executeScript(tabId, { file: 'jquery.js' }, function() {
-      chrome.tabs.executeScript(tabId, { file: 'listening.js' })
-    })
+    chrome.tabs.executeScript(tabId, { file: 'jquery.js' }, () => {
+      chrome.tabs.executeScript(tabId, { file: 'listening.js' });
+    });
   }
-})
+});
 
 // chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 //   // LOG THE CONTENTS HERE
